@@ -1,0 +1,8 @@
+services:
+  - type: web
+    name: zerodha
+    env: node
+    plan: free
+    buildCommand: npm install --prefix backend && npm install --prefix dashboard && npm run build --prefix dashboard
+    startCommand: node backend/index.js
+    autoDeploy: true

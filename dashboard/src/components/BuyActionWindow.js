@@ -7,12 +7,14 @@ import GeneralContext from "./GeneralContext";
 
 import "./BuyActionWindow.css";
 
+const API_BASE_URL = process.env.REACT_APP_API_URL || "";
+
 const BuyActionWindow = ({ uid }) => {
   const [stockQuantity, setStockQuantity] = useState(1);
   const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleBuyClick = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/newOrder`, {
+    axios.post(`${API_BASE_URL}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,

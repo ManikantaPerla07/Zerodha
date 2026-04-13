@@ -1,1 +1,6 @@
 node_modules
+backend/node_modules
+dashboard/node_modules
+dashboard/build
+backend/.env
+.env
