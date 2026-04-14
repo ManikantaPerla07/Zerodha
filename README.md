@@ -16,6 +16,8 @@ Repository: https://github.com/ManikantaPerla07/Zerodha
 
 - [Overview](#overview)
 - [Feature Highlights](#feature-highlights)
+- [Resume Highlights](#resume-highlights)
+- [Screenshots](#screenshots)
 - [Tech Stack](#tech-stack)
 - [Architecture](#architecture)
 - [Project Structure](#project-structure)
@@ -41,6 +43,47 @@ This project recreates a modern broker dashboard experience with watchlist, hold
 - Same-origin API support for single-service deployment
 - MongoDB-backed persistence
 - Production-ready Render setup with one-click config files
+
+## Resume Highlights
+
+- Built and deployed a production-style full-stack trading dashboard using React, Express, and MongoDB.
+- Implemented single-service architecture where backend serves API and frontend static assets.
+- Integrated order placement and holdings retrieval with persistent database operations.
+- Configured cloud deployment on Render with startup hardening and environment-based secrets.
+- Improved reliability by handling deployment/runtime edge cases (cold starts, route fallback compatibility, missing env handling).
+
+Resume-ready one-liner:
+
+Developed and deployed a Zerodha-inspired full-stack trading dashboard using React, Node.js/Express, and MongoDB, with integrated portfolio analytics and cloud-hosted single-service architecture on Render.
+
+## Screenshots
+
+Add your screenshots to:
+
+- docs/screenshots/
+
+Suggested file names:
+
+- docs/screenshots/dashboard.png
+- docs/screenshots/holdings.png
+- docs/screenshots/orders.png
+- docs/screenshots/watchlist.png
+
+Markdown snippet you can use after adding images:
+
+```md
+### Dashboard
+![Dashboard](docs/screenshots/dashboard.png)
+
+### Holdings
+![Holdings](docs/screenshots/holdings.png)
+
+### Orders
+![Orders](docs/screenshots/orders.png)
+
+### Watchlist
+![Watchlist](docs/screenshots/watchlist.png)
+```
 
 ## Tech Stack
 
