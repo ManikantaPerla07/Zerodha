@@ -26,7 +26,10 @@ Repository: https://github.com/ManikantaPerla07/Zerodha
 - [Run Locally](#run-locally)
 - [Deploy on Render](#deploy-on-render)
 - [Troubleshooting](#troubleshooting)
+- [FAQ](#faq)
 - [Security Notes](#security-notes)
+- [Contributing](#contributing)
+- [Changelog](#changelog)
 - [Roadmap](#roadmap)
 - [Author](#author)
 - [License](#license)
@@ -234,12 +237,34 @@ If frontend build fails:
 - Re-run build locally: `npm run build --prefix dashboard`
 - Verify dependency install in both `backend` and `dashboard`.
 
+## FAQ
+
+### Why do I sometimes see 503 on Render?
+Render free services can hibernate. First request may fail while waking. If the issue persists, check deploy logs and verify `MONGO_URL`.
+
+### Do I need separate frontend and backend deployments?
+No. This project is configured as one full-stack service. Express serves both API routes and frontend build files.
+
+### Why are holdings not visible in local run?
+Usually because MongoDB is not connected. Configure `MONGO_URL` in `backend/.env` and restart.
+
+### Which Node version should I use?
+Use an active LTS release (Node 20 recommended locally). Render default currently works, but LTS is safest for consistency.
+
 ## Security Notes
 
 - Do not commit `.env` with real credentials.
 - Use `.env.example` for shared config templates.
 - Rotate exposed credentials immediately.
 - Restrict Atlas network access whenever possible.
+
+## Contributing
+
+Contributions are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before opening pull requests.
+
+## Changelog
+
+Release history is tracked in [CHANGELOG.md](CHANGELOG.md).
 
 ## Roadmap
 
