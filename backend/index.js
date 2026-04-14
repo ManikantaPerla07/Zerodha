@@ -9,10 +9,16 @@ app.use(cors());
 app.use(express.json());
 
 // MongoDB connection
-mongoose.connect(process.env.MONGO_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const mongoUrl = process.env.MONGO_URL;
+
+if (mongoUrl) {
+  mongoose.connect(mongoUrl).catch((err) => {
+    console.error("MongoDB connection failed:", err.message);
+  });
+} else {
+  console.warn("MONGO_URL is not set. API database operations will fail until it is configured.");
+}
+
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "MongoDB connection error:"));
 db.once("open", () => {
