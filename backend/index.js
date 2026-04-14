@@ -51,7 +51,7 @@ app.get("/allHoldings", async (req, res) => {
 // 🔥 Serve frontend React app from dashboard/build
 app.use(express.static(path.join(__dirname, "../dashboard/build")));
 
-app.get("*", (req, res) => {
+app.get(/.*/, (req, res) => {
   res.sendFile(path.join(__dirname, "../dashboard/build/index.html"));
 });
 
