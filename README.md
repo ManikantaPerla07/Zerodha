@@ -1,172 +1,210 @@
 # Zerodha Clone - Full-Stack Trading Dashboard
 
-A full-stack Zerodha-inspired trading dashboard built with React and Express, backed by MongoDB. The application is deployed as a single service where the backend serves both API routes and the frontend build.
+[![Live](https://img.shields.io/badge/Live-Demo-success)](https://zeroodha.onrender.com)
+[![Frontend](https://img.shields.io/badge/Frontend-React-blue)](https://react.dev)
+[![Backend](https://img.shields.io/badge/Backend-Node%20%2B%20Express-green)](https://expressjs.com)
+[![Database](https://img.shields.io/badge/Database-MongoDB-brightgreen)](https://www.mongodb.com)
+[![Deploy](https://img.shields.io/badge/Deploy-Render-purple)](https://render.com)
 
-Live Demo:
-https://zeroodha.onrender.com
+A Zerodha-inspired trading dashboard that combines a React frontend and Node/Express backend with MongoDB persistence. The app is deployed as a single full-stack service where Express serves both API routes and static frontend assets.
 
-Repository:
-https://github.com/ManikantaPerla07/Zerodha
+Live URL: https://zeroodha.onrender.com
+
+Repository: https://github.com/ManikantaPerla07/Zerodha
+
+## Table of Contents
+
+- [Overview](#overview)
+- [Feature Highlights](#feature-highlights)
+- [Tech Stack](#tech-stack)
+- [Architecture](#architecture)
+- [Project Structure](#project-structure)
+- [API Reference](#api-reference)
+- [Environment Variables](#environment-variables)
+- [Run Locally](#run-locally)
+- [Deploy on Render](#deploy-on-render)
+- [Troubleshooting](#troubleshooting)
+- [Security Notes](#security-notes)
+- [Roadmap](#roadmap)
+- [Author](#author)
+- [License](#license)
 
 ## Overview
 
-This project replicates a modern trading interface with watchlist, holdings views, order actions, and dashboard metrics. It is designed for portfolio and learning use, with deployment-ready configuration for Render.
+This project recreates a modern broker dashboard experience with watchlist, holdings, portfolio summary, and order placement flow. It is optimized for portfolio presentation and cloud deployment.
 
-## Key Features
+## Feature Highlights
 
-- Interactive trading-style dashboard UI
-- Watchlist and holdings screens
-- Buy action flow with backend API integration
-- Single-service architecture for easy deployment
-- MongoDB integration for persistent data
-- Production-ready Render configuration
+- Dashboard-style UI inspired by Zerodha workflow
+- Holdings table with chart visualization
+- Buy order interaction connected to backend API
+- Same-origin API support for single-service deployment
+- MongoDB-backed persistence
+- Production-ready Render setup with one-click config files
 
 ## Tech Stack
 
-Frontend:
-- React
+Frontend
+- React 18
 - React Router
 - Material UI
-- Chart.js
+- Chart.js + react-chartjs-2
 - Axios
 
-Backend:
+Backend
 - Node.js
 - Express
 - Mongoose
 - CORS
 - dotenv
 
-Deployment:
-- Render (single web service)
-
-## Project Structure
-
-	Zerodha/
-	|- backend/
-	|  |- index.js
-	|  |- model/
-	|  |- schemas/
-	|  |- package.json
-	|  |- .env.example
-	|
-	|- dashboard/
-	|  |- src/
-	|  |- public/
-	|  |- package.json
-	|
-	|- render.yaml
-	|- Procfile
-	|- package.json
-	|- README.md
+Deployment
+- Render web service (single deployment)
 
 ## Architecture
 
-1. React app is built into static assets in dashboard/build.
+1. React app is built to `dashboard/build`.
 2. Express serves API endpoints and static frontend files.
-3. MongoDB stores holdings/order data.
-4. One Render service runs the complete app.
+3. MongoDB stores holdings and order data.
+4. Render runs one service for both frontend and backend.
 
-## API Endpoints
+## Project Structure
 
-GET /allHoldings
-- Returns holdings data from MongoDB.
+```text
+Zerodha/
+|- backend/
+|  |- index.js
+|  |- model/
+|  |- schemas/
+|  |- package.json
+|  |- .env.example
+|
+|- dashboard/
+|  |- src/
+|  |- public/
+|  |- package.json
+|
+|- render.yaml
+|- Procfile
+|- package.json
+|- README.md
+```
 
-POST /newOrder
-- Creates a new order document.
+## API Reference
+
+### `GET /allHoldings`
+Returns holdings data from MongoDB.
+
+Success response (example):
+
+```json
+[
+  {
+    "name": "INFY",
+    "qty": 2,
+    "avg": 1450,
+    "price": 1555.45,
+    "net": "+2.1%",
+    "day": "+0.3%"
+  }
+]
+```
+
+### `POST /newOrder`
+Creates a new order in MongoDB.
+
+Request body (example):
+
+```json
+{
+  "name": "INFY",
+  "qty": 1,
+  "price": 1555.45,
+  "mode": "BUY"
+}
+```
+
+Success response:
+
+```json
+{
+  "message": "Order saved successfully!"
+}
+```
 
 ## Environment Variables
 
-Create backend/.env for local development (do not commit secrets):
+Create `backend/.env` for local development:
 
-	MONGO_URL=mongodb+srv://<username>:<password>@<cluster>/<database>?retryWrites=true&w=majority&appName=ZerodhaCluster
+```env
+MONGO_URL=mongodb+srv://<username>:<password>@<cluster>/<database>?retryWrites=true&w=majority&appName=ZerodhaCluster
+```
 
-For Render, add the same key in service environment variables:
+For Render:
+- Key: `MONGO_URL`
+- Value: your full MongoDB connection URI
 
-- Key: MONGO_URL
-- Value: your full MongoDB URI
-
-Note:
-- If your password contains special characters, URL-encode it.
+If password includes special characters (`@`, `#`, `%`, `/`, `:`), URL-encode it.
 
 ## Run Locally
 
-1. Clone the repository:
+```bash
+git clone https://github.com/ManikantaPerla07/Zerodha
+cd Zerodha
 
-	git clone https://github.com/ManikantaPerla07/Zerodha
-	cd Zerodha
+npm install --prefix backend
+npm install --prefix dashboard
+npm run build --prefix dashboard
 
-2. Install dependencies:
+node backend/index.js
+```
 
-	npm install --prefix backend
-	npm install --prefix dashboard
-
-3. Build frontend:
-
-	npm run build --prefix dashboard
-
-4. Start backend server:
-
-	node backend/index.js
-
-5. Open in browser:
-
-	http://localhost:3002
+Open: `http://localhost:3002`
 
 ## Deploy on Render
 
-This repository is already configured for Render using render.yaml.
+This repo is preconfigured with `render.yaml` and `Procfile`.
 
-Build Command:
+Recommended Render settings:
 
-	rm -rf node_modules backend/node_modules dashboard/node_modules && npm install --prefix backend && npm install --prefix dashboard && npm run build --prefix dashboard
-
-Start Command:
-
-	node backend/index.js
-
-Deployment Steps:
-
-1. Create a new Web Service in Render.
-2. Connect this GitHub repository.
-3. Keep root directory empty.
-4. Add environment variable MONGO_URL.
-5. Deploy.
-
-## Production Notes
-
-- Frontend and backend are deployed together in a single service.
-- Frontend API calls support same-origin deployment.
-- Service supports Render cold starts and startup resilience.
+| Setting | Value |
+|---|---|
+| Runtime | Node |
+| Root Directory | (leave empty) |
+| Build Command | `rm -rf node_modules backend/node_modules dashboard/node_modules && npm install --prefix backend && npm install --prefix dashboard && npm run build --prefix dashboard` |
+| Start Command | `node backend/index.js` |
+| Environment Variable | `MONGO_URL` |
 
 ## Troubleshooting
 
-If homepage returns 503:
-- Check latest Render deploy logs.
-- Verify MONGO_URL is set correctly.
+If homepage returns `503`:
+- Check latest Render logs for startup crash.
+- Verify `MONGO_URL` exists in Render env vars.
 - Trigger manual redeploy.
 
-If holdings fail to load:
-- Confirm MongoDB Atlas Network Access allows your Render service.
-- Confirm MongoDB user/password are valid.
+If holdings are not loading:
+- Check MongoDB Atlas Network Access.
+- Check database user credentials and password.
+- Confirm your URI database name is correct.
 
 If frontend build fails:
-- Ensure dashboard dependencies install successfully.
-- Re-run build command locally to reproduce.
+- Re-run build locally: `npm run build --prefix dashboard`
+- Verify dependency install in both `backend` and `dashboard`.
 
-## Security Checklist
+## Security Notes
 
-- Do not commit .env files with real credentials.
-- Rotate MongoDB credentials if a secret was exposed.
-- Keep Atlas IP access restricted when possible.
+- Do not commit `.env` with real credentials.
+- Use `.env.example` for shared config templates.
+- Rotate exposed credentials immediately.
+- Restrict Atlas network access whenever possible.
 
 ## Roadmap
 
-- Authentication and user sessions
-- Better order schema and validations
-- Portfolio analytics and insights
-- Realtime price integration
-- Improved mobile responsiveness
+- Authentication and per-user portfolios
+- Better order schema validation and history
+- Realtime market feed integration
+- Portfolio analytics and risk metrics
+- Mobile-first responsive refinements
 
 ## Author
 
